@@ -81,7 +81,7 @@ body {
 
 .chip {
     border: none;
-    border-radius: 999px;
+    border-radius: 253px;
     padding: 6px 12px;
     cursor: pointer;
     background: var(--chip);
@@ -110,7 +110,7 @@ body {
 .add-form textarea {
     border: none;
     border-radius: var(--radius);
-    padding: 10px;
+    padding: 19px;
     background: #0f0f0f;
     color: var(--text);
 }
