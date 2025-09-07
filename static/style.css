@@ -1,0 +1,131 @@
+:root {
+    --bg: #1e1e1e;
+    --panel: #2c2c2c;
+    --text: #f3f3f3;
+    --muted: #aaa;
+    --danger: #e74c3c;
+    --ok: #22c55e;
+    --chip: #3a3a3a;
+    --accent: #ff4747;
+    --radius: 16px;
+    --shadow: 0 4px 20px rgba(0, 0, 0, .4);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, sans-serif;
+}
+
+.screen {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.headline {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.cards {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.task-card {
+    background: var(--panel);
+    padding: 16px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.task-card.priority {
+    border: 2px solid var(--accent);
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.title {
+    margin: 6px 0;
+    font-size: 20px;
+}
+
+.desc {
+    margin: 0;
+    color: #ddd;
+}
+
+.task-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.chip {
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    cursor: pointer;
+    background: var(--chip);
+    color: var(--text);
+    font-weight: 600;
+}
+
+.chip.danger {
+    background: var(--danger);
+}
+
+.chip.on {
+    background: var(--accent);
+}
+
+.add-form {
+    display: grid;
+    gap: 10px;
+    background: #151515;
+    padding: 16px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.add-form input,
+.add-form textarea {
+    border: none;
+    border-radius: var(--radius);
+    padding: 10px;
+    background: #0f0f0f;
+    color: var(--text);
+}
+
+.primary {
+    background: var(--ok);
+    border: none;
+    padding: 10px;
+    border-radius: var(--radius);
+    font-weight: bold;
+    cursor: pointer;
+    color: #fff;
+}
+
+.empty {
+    text-align: center;
+    color: var(--muted);
+}

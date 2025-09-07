@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>To-Do</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <main class="screen">
+        <h1 class="headline">Welcome to To-Do! Meet your Inbox</h1>
+
+        <section class="cards">
+            {% if tasks|length == 0 %}
+            <p class="empty">Nenhuma tarefa adicionada ainda. Clique no botão “+”.</p>
+            {% endif %}
+
+            {% for t in tasks %}
+            <div class="task-card {% if t[4] %}priority{% endif %}">
+                <div class="task-header">
+                    <span class="subtitle">{{ t[2] or 'sub-título' }}</span>
+                    <form method="post" action="{{ url_for('delete', task_id=t[0]) }}">
+                        <button class="chip danger">Excluir</button>
+                    </form>
+                </div>
+                <h2 class="title">{{ t[1] }}</h2>
+                <p class="desc">{{ t[3] }}</p>
+                <div class="task-footer">
+                    <form method="post" action="{{ url_for('priority', task_id=t[0]) }}">
+                        <button class="chip {% if t[4] %}on{% endif %}">Prioridade</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+
+        <section class="add">
+            <form method="post" action="{{ url_for('add') }}" class="add-form">
+                <input type="text" name="title" placeholder="Nome da tarefa" required>
+                <input type="text" name="subtitle" placeholder="Subtítulo (opcional)">
+                <textarea name="description" placeholder="Descrição"></textarea>
+                <button class="primary">Criar</button>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>
