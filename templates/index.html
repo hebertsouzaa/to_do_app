@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>To-Do</title>
+    <title>Lista de Tarefas</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
     <main class="screen">
-        <h1 class="headline">Welcome to To-Do! Meet your Inbox</h1>
+        <h1 class="headline">Bem-vindo! Conheça sua caixa de entrada</h1>
 
         <section class="cards">
             {% if tasks|length == 0 %}
