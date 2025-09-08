@@ -9,6 +9,7 @@
     --accent: #ff4747;
     --radius: 16px;
     --shadow: 0 4px 20px rgba(0, 0, 0, .4);
+    --transition: 0.25s ease;
 }
 
 * {
@@ -20,6 +21,7 @@ body {
     background: var(--bg);
     color: var(--text);
     font-family: system-ui, sans-serif;
+    line-height: 1.5;
 }
 
 .screen {
@@ -32,12 +34,14 @@ body {
     text-align: center;
     font-size: 28px;
     margin-bottom: 20px;
+    font-weight: 700;
 }
 
 .cards {
     display: grid;
     gap: 16px;
     margin-bottom: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .task-card {
@@ -45,6 +49,13 @@ body {
     padding: 16px;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+    transition: transform var(--transition), box-shadow var(--transition);
+    animation: fadeIn 0.4s ease;
+}
+
+.task-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
 }
 
 .task-card.priority {
@@ -66,16 +77,19 @@ body {
 .title {
     margin: 6px 0;
     font-size: 20px;
+    font-weight: 600;
 }
 
 .desc {
     margin: 0;
     color: #ddd;
+    font-size: 15px;
 }
 
 .task-footer {
     display: flex;
     justify-content: flex-end;
+    gap: 8px;
     margin-top: 8px;
 }
 
@@ -87,10 +101,27 @@ body {
     background: var(--chip);
     color: var(--text);
     font-weight: 600;
+    transition: background var(--transition), transform var(--transition);
+}
+
+.chip:hover {
+    transform: scale(1.05);
 }
 
 .chip.danger {
     background: var(--danger);
+}
+
+.chip.danger:hover {
+    background: #c0392b;
+}
+
+.chip.update {
+    background: var(--ok);
+}
+
+.chip.update:hover {
+    background: #16a34a;
 }
 
 .chip.on {
@@ -107,25 +138,57 @@ body {
 }
 
 .add-form input,
-.add-form textarea {
+.add-form textarea,
+.update-form input,
+.update-form textarea {
     border: none;
     border-radius: var(--radius);
-    padding: 19px;
+    padding: 14px;
     background: #0f0f0f;
     color: var(--text);
+    transition: border var(--transition), background var(--transition);
+}
+
+.add-form input:focus,
+.add-form textarea:focus,
+.update-form input:focus,
+.update-form textarea:focus {
+    outline: none;
+    border: 1px solid var(--ok);
+    background: #1a1a1a;
 }
 
 .primary {
     background: var(--ok);
     border: none;
-    padding: 10px;
+    padding: 12px;
     border-radius: var(--radius);
     font-weight: bold;
     cursor: pointer;
     color: #fff;
+    transition: background var(--transition), transform var(--transition);
+}
+
+.primary:hover {
+    background: #16a34a;
+    transform: translateY(-2px);
 }
 
 .empty {
     text-align: center;
     color: var(--muted);
+    font-style: italic;
+    margin: 20px 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

@@ -22,6 +22,34 @@ def index():
         tasks = conn.execute("SELECT id, title, subtitle, description, priority FROM tasks ORDER BY id DESC").fetchall()
     return render_template("index.html", tasks=tasks)
 
+@app.route("/update/<int:task_id>", methods=["POST"])
+def update(task_id):
+    title = request.form.get("title")
+    subtitle = request.form.get("subtitle")
+    description = request.form.get("description")
+
+        # Monta lista de campos e valores dinamicamente
+    fields = []
+    values = []
+
+    if title:  # só atualiza se tiver valor
+        fields.append("title = ?")
+        values.append(title)
+    if subtitle:  # só atualiza se tiver valor
+        fields.append("subtitle = ?")
+        values.append(subtitle)
+    if description:  # só atualiza se tiver valor
+        fields.append("description = ?")
+        values.append(description)
+
+    if fields:  # só executa UPDATE se houver campos a atualizar
+        values.append(task_id)
+        sql = f"UPDATE tasks SET {', '.join(fields)} WHERE id = ?"
+        with sqlite3.connect(DB) as conn:
+            conn.execute(sql, values)
+
+    return redirect(url_for("index"))
+
 @app.route("/add", methods=["POST"])
 def add():
     title = request.form.get("title")

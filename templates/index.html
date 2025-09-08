@@ -10,7 +10,7 @@
 
 <body>
     <main class="screen">
-        <h1 class="headline">Bem-vindo! Conheça sua caixa de entrada</h1>
+        <h1 class="headline">Seja bem-vindo! Conheça sua caixa de entrada</h1>
 
         <section class="cards">
             {% if tasks|length == 0 %}
@@ -25,13 +25,31 @@
                         <button class="chip danger">Excluir</button>
                     </form>
                 </div>
+
                 <h2 class="title">{{ t[1] }}</h2>
                 <p class="desc">{{ t[3] }}</p>
+
                 <div class="task-footer">
                     <form method="post" action="{{ url_for('priority', task_id=t[0]) }}">
                         <button class="chip {% if t[4] %}on{% endif %}">Prioridade</button>
                     </form>
+                    <button type="button" class="chip update" onclick="toggleEdit('{{ t[0] }}')">Editar</button>
                 </div>
+
+                <!-- Formulário oculto de edição -->
+                <form method="post" action="{{ url_for('update', task_id=t[0]) }}" class="update-form"
+                    id="edit-form-{{ t[0] }}" style="display:none;">
+                    <input type="text" name="title" value="{{ t[1] }}" required>
+                    <input type="text" name="subtitle" value="{{ t[2] or '' }}">
+                    <textarea name="description">{{ t[3] or '' }}</textarea>
+                    <button class="primary">Salvar alterações</button>
+                </form>
+                <script>
+                    function toggleEdit(id) {
+                        const form = document.getElementById(`edit-form-${id}`);
+                        form.style.display = (form.style.display === "none") ? "block" : "none";
+                    }
+                </script>
             </div>
             {% endfor %}
         </section>
